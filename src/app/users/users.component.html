@@ -1,0 +1,130 @@
+<mat-card class="card">
+    <h2>Crear, editar, modificar y borrar.</h2>
+</mat-card>
+<mat-card class="card">
+<div class="current-user">
+    <h3>Usuario actual</h3>
+    <p>Nombre: {{currentUser.name | uppercase}}</p>
+    <p>Apellido/s: {{currentUser.surname | uppercase}}</p>
+    <p>DNI: {{currentUser.dni}}</p>
+    <p>Edad: {{currentUser.age}} años</p>
+    <p>Fecha de nacimiento: {{currentUser.bday}}</p>
+    <p>Sexo: {{currentUser.sex}}</p>
+    <p>Color favorito: {{currentUser.favColor}}</p>
+</div>
+</mat-card>
+
+<mat-card class="card">
+    <form (submit) = "registerUser()">
+        <mat-form-field class="material-full-width">
+            <mat-label for="name">Nombre</mat-label>
+            <input 
+            [ngModelOptions]="{standalone : true}" 
+            type="text"
+            id="name" 
+            required
+            matInput placeholder="Nombre"
+            [(ngModel)]='currentUser.name'>
+        </mat-form-field>
+
+        <mat-form-field class="material-full-width">
+            <mat-label for="surname">Apellidos</mat-label>
+            <input
+            [ngModelOptions]="{standalone : true}" 
+            type="text" 
+            id="surname"
+            required
+            matInput placeholder="Apellidos"
+            [(ngModel)]='currentUser.surname'>
+        </mat-form-field>
+
+        <mat-form-field class="material-full-width">
+            <mat-label for="dni">DNI</mat-label>
+            <input
+            [ngModelOptions]="{standalone : true}" 
+            type="text" 
+            maxlength="9"
+            size="9"
+            id="dni"
+            matInput placeholder="Introduzca su DNI"
+            name="dni"
+            required 
+            pattern="(([X-Z]{1})([-]?)(\d{7})([-]?)([A-Z]{1}))|((\d{8})([-]?)([A-Z a-z]{1}))" 
+            title="Debe poner 8 números y una letra"
+            [(ngModel)]='currentUser.dni'>
+        </mat-form-field> 
+
+        <mat-form-field class="material-full-width">
+            <mat-label for="bday">Fecha de nacimiento</mat-label>
+            <input
+            [ngModelOptions]="{standalone : true}" 
+            type="date"
+            id="id"  
+            matInput placeholder="Fecha de nacimiento" 
+            name="bday"
+            max="2021-01-01"
+            min="1900-12-31"
+            required
+            [(ngModel)]='currentUser.bday'>
+        </mat-form-field>  
+
+        <mat-form-field class="material-full-width">
+            <mat-label for="edad">Edad</mat-label>
+            <input 
+            id="edad"
+            [ngModelOptions]="{standalone : true}" 
+            type="number" 
+            min="1" max="125"
+            required
+            name="edad"
+            title="Debe poner del 1 al 125"
+            matInput placeholder="Edad"
+            [(ngModel)]='currentUser.age'>
+        </mat-form-field> 
+
+        <mat-form-field class="material-full-width" appearance="fill">
+        <mat-label for="id_select">Sexo</mat-label>
+        <select  id="id_select" matNativeControl required>
+            <option label="--selecciona una opción--"></option>
+            <option value="woman"> Mujer</option>
+            <option value="man"> Hombre</option>
+            <option value="non-binary"> No binario</option>
+            <option value="noanswer"> No me identifico con ninguno de los espeficados</option>
+        </select>
+        </mat-form-field>
+
+        <mat-form-field class="color-swatch">
+            <mat-label for="myColor">Color favorito</mat-label>
+            <input
+            required
+            [ngModelOptions]="{standalone : true}" 
+            type="color"
+            id="myColor" 
+            value="#ffffff"
+            matInput placeholder="Color favorito"
+            [(ngModel)]='currentUser.favColor'>
+        </mat-form-field>  
+
+            <button mat-flat-button color="primary" type="submit">Registrar</button>    
+    </form>
+</mat-card>
+
+<mat-card class="card">
+    <h3>Lista de usuarios</h3>
+    <div class="user-list">
+        <ul>
+            <li *ngFor= "let eachUser of usersList; let i=index">
+                {{ i+1 }}
+                {{ eachUser.name | uppercase}}
+                {{ eachUser.surname | uppercase}}
+                {{ eachUser.surname | uppercase}}
+                {{ eachUser.dni}}
+                {{ eachUser.age}}
+                {{ eachUser.bday}}
+                {{ eachUser.favColor}}
+                <button mat-flat-button color="primary" (click)="updateUser(i)">Actualizar</button>
+                <button mat-flat-button color="warn" (click)="deleteUser(i)">Eliminar</button>
+            </li> 
+        </ul>
+    </div>
+</mat-card>
