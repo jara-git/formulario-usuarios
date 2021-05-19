@@ -21,6 +21,7 @@ import { MaterialModule } from './material/material.module'
     BrowserModule,
     FormsModule,
     NoopAnimationsModule,
+    ColorPickerModule,
     MaterialModule
     
   ],

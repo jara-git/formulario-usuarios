@@ -2,6 +2,7 @@ import { isGeneratedFile } from '@angular/compiler/src/aot/util';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { User } from '../user';
+import { Browser } from '@syncfusion/ej2-base';
 
 @Component({
   selector: 'app-users',
@@ -14,6 +15,9 @@ export class UsersComponent implements OnInit {
   action: string = 'insert;'
 
   usersList: Array<User> = [];
+
+  sex = ['Mujer', 'Hombre',
+            'No binario', 'No me identifico con ninguno de los descritos'];
 
   currentUser: User = {
     name: '',
@@ -30,13 +34,13 @@ export class UsersComponent implements OnInit {
      
         this.usersList.push(this.currentUser)
         this.currentUser = {
-          name: "",
-          surname: "",
+          name: '',
+          surname: '',
           age: 0,
-          dni: "",
+          dni: '',
           bday: new Date(),
-          favColor : "",
-          sex : ""
+          favColor : '',
+          sex : ''
         
     }
     } else {
@@ -44,13 +48,13 @@ export class UsersComponent implements OnInit {
       this.action = 'insert';
     }
     this.currentUser ={
-        name: "",
-        surname: "",
-        age: 0,
-        dni: "",
-        bday: new Date(),
-        favColor : "",
-        sex : ""
+         name: '',
+          surname: '',
+          age: 0,
+          dni: '',
+          bday: new Date(),
+          favColor : '',
+          sex : ''
     }
   }
 

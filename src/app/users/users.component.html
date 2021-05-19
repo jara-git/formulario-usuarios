@@ -83,27 +83,42 @@
         </mat-form-field> 
 
         <mat-form-field class="material-full-width" appearance="fill">
-        <mat-label for="id_select">Sexo</mat-label>
-        <select  id="id_select" matNativeControl required>
-            <option label="--selecciona una opción--"></option>
-            <option value="woman"> Mujer</option>
-            <option value="man"> Hombre</option>
-            <option value="non-binary"> No binario</option>
-            <option value="noanswer"> No me identifico con ninguno de los espeficados</option>
-        </select>
+            <mat-label for="sexo">Sexo</mat-label>
+            <select  id="sexo" matNativeControl 
+            required
+            [(ngModel)]="currentUser.sex" name="sexo">
+                <option  *ngFor="let sexo of sex, let i=index" [value]="sexo">{{sex[i]}}</option>
+            </select>
         </mat-form-field>
 
-        <mat-form-field class="color-swatch">
+        <div class="color-selectors"><p>Introduce el color por texto o selecciona color en la banda</p>
+        <mat-form-field >
             <mat-label for="myColor">Color favorito</mat-label>
-            <input
+            <input class="color-picker"
             required
             [ngModelOptions]="{standalone : true}" 
-            type="color"
+            type="text"
             id="myColor" 
             value="#ffffff"
-            matInput placeholder="Color favorito"
+            pattern="^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)"
+            matInput placeholder="#FF0000 or #F00"
+            ng-model="color" ng-style="{ 'border-color': color }"
             [(ngModel)]='currentUser.favColor'>
         </mat-form-field>  
+
+        <mat-form-field>
+            <mat-label for="secondColor">Banda de color</mat-label>
+            <input class="color-picker2"
+            [ngModelOptions]="{standalone : true}" 
+            type="color"
+            id="secondColor" 
+            value="#ffffff"
+            pattern="^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)"
+            matInput placeholder="#FF0000 or #F00"
+            ng-model="color" ng-style="{ 'border-color': color }"
+            [(ngModel)]='currentUser.favColor'>
+        </mat-form-field> 
+        </div>
 
             <button mat-flat-button color="primary" type="submit">Registrar</button>    
     </form>
@@ -115,15 +130,18 @@
         <ul>
             <li *ngFor= "let eachUser of usersList; let i=index">
                 {{ i+1 }}
-                {{ eachUser.name | uppercase}}
-                {{ eachUser.surname | uppercase}}
-                {{ eachUser.surname | uppercase}}
-                {{ eachUser.dni}}
-                {{ eachUser.age}}
-                {{ eachUser.bday}}
-                {{ eachUser.favColor}}
-                <button mat-flat-button color="primary" (click)="updateUser(i)">Actualizar</button>
-                <button mat-flat-button color="warn" (click)="deleteUser(i)">Eliminar</button>
+                nombre: {{ eachUser.name | uppercase}}
+                apellido/s: {{ eachUser.surname | uppercase}}
+                dni: {{ eachUser.dni}}
+                edad: {{ eachUser.age}} años
+                fecha de nacimiento: {{ eachUser.bday}}
+                sex: {{ eachUser.sex}}
+                color favorito:{{ eachUser.favColor}}
+                <div class="btns">
+                    <button mat-flat-button color="primary" (click)="updateUser(i)">Actualizar</button>
+                    <button mat-flat-button color="warn" (click)="deleteUser(i)">Eliminar</button>
+                </div>
+                
             </li> 
         </ul>
     </div>
