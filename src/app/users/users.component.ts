@@ -2,7 +2,6 @@ import { isGeneratedFile } from '@angular/compiler/src/aot/util';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { User } from '../user';
-import { Browser } from '@syncfusion/ej2-base';
 
 @Component({
   selector: 'app-users',
